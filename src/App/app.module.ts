@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 
-import { AppController } from './app.controller';
-import { GetHello } from './usecases/get-hello.usecase';
 import { CommonCoreModule } from 'src/CommonCore/infrastructure/modules/common-core.module';
+import { TrustGraphModule } from 'src/TrustGraph/infrastructure/modules/trust-graph.module';
 
 @Module({
-  imports: [CommonCoreModule],
-  controllers: [AppController],
-  providers: [
-    {
-      provide: GetHello,
-      useClass: GetHello,
-    },
+  imports: [
+    CommonCoreModule,
+    TrustGraphModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
   ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
